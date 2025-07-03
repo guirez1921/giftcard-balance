@@ -28,7 +28,7 @@ export const CodeInput: React.FC<CodeInputProps> = ({
             <label className="block text-sm font-medium text-gray-700">
               {label}
             </label>
-            <input type="text" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder={index === 0 ? placeholder.split(',')[0] : placeholder.split(',')[index]} value={inputs[index]} onChange={e => handleMultipleInputChange(index, e.target.value)} />
+            <input type="text" className="w-full p-3 border text-gray-100 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder={index === 0 ? placeholder.split(',')[0] : placeholder.split(',')[index]} value={inputs[index]} onChange={e => handleMultipleInputChange(index, e.target.value)} />
           </div>)}
       </div>;
   }
