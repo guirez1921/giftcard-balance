@@ -36,6 +36,6 @@ export const CodeInput: React.FC<CodeInputProps> = ({
       <label className="block text-sm font-medium text-gray-700">
         Redemption Code
       </label>
-      <input type="text" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder={placeholder} onChange={handleSingleInputChange} />
+      <input type="text" className="w-full p-3 border text-gray-100 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder={placeholder} onChange={handleSingleInputChange} />
     </div>;
 };
