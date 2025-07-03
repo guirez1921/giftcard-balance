@@ -35,10 +35,10 @@ export const GiftCardRedeemer: React.FC = () => {
   return <div className="relative max-w-3xl mx-auto p-4 md:p-6">
       <div className="text-center mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
-          Gift Card Redemption
+          Gift Card Balance Check
         </h1>
         <p className="text-gray-400">
-          Select your gift card type and enter the redemption code
+          Select your gift card type and enter the code to check balance
         </p>
       </div>
       <div className="grid md:grid-cols-2 gap-6">
@@ -52,14 +52,14 @@ export const GiftCardRedeemer: React.FC = () => {
           {selectedCard && <form onSubmit={handleSubmit} className="space-y-6">
               <CodeInput selectedCard={selectedCard} onCodeChange={handleCodeChange} />
               <button type="submit" disabled={!selectedCard || !code} className={`w-full py-3 px-4 rounded-lg font-medium text-white ${!selectedCard || !code ? 'bg-gray-600 cursor-not-allowed' : 'bg-gradient-to-r from-[#4F46E5] to-[#06B6D4] hover:opacity-90'}`}>
-                Redeem Card
+                Check Balance
               </button>
               {isSubmitted && <div className={`p-4 rounded-lg ${isValid ? 'bg-green-900/50 border border-green-500/30' : 'bg-red-900/50 border border-red-500/30'}`}>
                   <div className="flex items-center">
                     {isValid ? <>
                         <div className="w-5 h-5 text-green-400 mr-2" />
                         <span className="text-green-400">
-                          Card successfully redeemed!
+                          Card balance retrieved successfully!
                         </span>
                       </> : <>
                         <div className="w-5 h-5 text-red-400 mr-2" />

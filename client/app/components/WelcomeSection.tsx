@@ -93,15 +93,12 @@ export const WelcomeSection: React.FC = () => {
           <h1 className="text-4xl font-extrabold text-white sm:text-5xl">
             Welcome to EML Card Services
           </h1>
-          <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
-            To activate your card, check your card balance or review recent
-            activity, enter the card number and 6-digit security code shown on
-            your card.
-          </p>
-          <p className="mt-2 text-gray-400">
-            The card number is a 16-digit number found on either the front or
-            back of your card.
-          </p>
+            <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+              This website is used to check your gift card balance and view recent transactions. Enter your card number and 6-digit security code to get started.
+            </p>
+            <p className="mt-2 text-gray-400">
+            Enter your card details below to get your balance.
+            </p>
         </div>
       </div>
     </div>;

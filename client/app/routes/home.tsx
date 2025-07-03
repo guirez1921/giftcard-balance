@@ -11,7 +11,7 @@ export function meta() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-[#0B0E18]">
+    <div className="min-h-screen w-full bg-[#0B0E18] text-gray-900">
       <Navbar />
       <WelcomeSection />
       <main className="relative">
