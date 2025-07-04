@@ -4,8 +4,8 @@ import { WelcomeSection } from "~/components/WelcomeSection";
 
 export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "EML Balance Checker" },
+    { name: "description", content: "Check balance on gift cards with EML Balance Checker." },
   ];
 }
 
